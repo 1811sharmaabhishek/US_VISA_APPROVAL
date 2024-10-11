@@ -1,4 +1,4 @@
-from us_visa.constants import DATABASE_NAME,COLLECTION_NAME
+from us_visa.constants import DATABASE_NAME
 from us_visa.exception import USVisaException
 from us_visa.logger import logging
 from us_visa.configuration.mongo_db_connection import MongoDBClient
@@ -36,6 +36,7 @@ class USVisaData:
             if '_id' in df.columns:
                 df.drop(columns=["_id"],axis=1, inplace=True)
             df.replace({"na",np.nan},inplace=True)
+            logging.info('Records are converted to DataFrame')
             return df
         except Exception as e:
             raise USVisaException(e,sys)
